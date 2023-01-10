@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Home');
 });
+
+Route::get('/pembelian', function () {
+    return view('Pembelian');
+});
+
+Route::get('/keranjang', function () {
+    return view('Keranjang');
+});

@@ -5,34 +5,35 @@
 
         <div class="row row-cols-1 row-cols-md-3 g-5 mb-5">
             <div class="col">
-                <img src="{{ asset('img/foto-kue/Pumpkin Spice Biscoff Cake.jpg') }}" class="card-img-top foto-kue mb-2"
-                    alt="...">
+                <img src="{{ asset('foto-kue/' . $kue->foto_kue) }}" class="card-img-top foto-kue mb-2" alt="...">
             </div>
             <div class="col">
-                <h1 class="fs-1 fw-bold">Nama Kue</h1>
-                <h2 class="fs-2">Rp 30.000,00</h2>
+                <h1 class="fs-1 fw-bold">{{ $kue->nama_kue }}</h1>
+                <h2 class="fs-2">Rp {{ number_format($kue->harga_kue) }}</h2>
                 <div class="mt-4">
-                    <h2 class="fs-4 fw-bold">Bahan Bahan Kue</h2>
-                    <ul>
-                        <li>Telor</li>
-                        <li>Krim Susu</li>
-                        <li>Coklat</li>
-                        <li>Tepung</li>
-                        <li>Gula</li>
-                    </ul>
+                    <h2 class="fs-4 fw-bold">Deskripsi Kue</h2>
+                    <p>{{ $kue->deskripsi_kue }}</p>
                 </div>
             </div>
             <div class="col">
                 <div class="card p-2">
                     <div class="card-body">
-                        <div class="card-title fw-bold fs-4">Pesan Kue</div>
-                        <div class="my-3">
-                            <label for="jumlah">Jumlah Kue Dipesan</label>
-                            <input type="text" name="jumlah" id="jumlah" class="form-control w-50" value="1">
-                        </div>
-                        <h2 class="fs-5">Total Harga</h2>
-                        <h2 class="fs-5 fw-bold" id="total">Rp 30.000,00</h2>
-                        <a href="#" class="btn btn-primer w-100">Pesan</a>
+                        <form action="/pesan-kue/{{ $kue->id }}" method="post">
+                            @csrf
+                            <div class="card-title fw-bold fs-4">Pesan Kue</div>
+                            <div class="my-3">
+                                <label for="alamat">Alamat Dikirim</label>
+                                <textarea name="alamat" id="alamat" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="my-3">
+                                <label for="jumlah">Jumlah Kue Dipesan</label>
+                                <input type="text" name="jumlah" id="jumlah" class="form-control w-50"
+                                    value="1">
+                            </div>
+                            <h2 class="fs-5">Total Harga</h2>
+                            <h2 class="fs-5 fw-bold" id="total">Rp {{ number_format($kue->harga_kue) }}</h2>
+                            <button type="submit" class="btn btn-primer w-100">Pesan</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -40,27 +41,27 @@
 
         {{-- Testimoni --}}
         <div class="mt-4">
-            @for ($i = 0; $i < 5; $i++)
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="foto-testimoni">
-                                    <img src="{{ asset('img/foto-kue/Pumpkin Spice Biscoff Cake.jpg') }}"
-                                        class="card-img-top foto-testi mb-2" alt="...">
+            @foreach ($testimoni as $testi)
+                @foreach ($user as $nama)
+                    @if ($nama->id == $testi->user_id)
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="foto-testimoni text-center">
+                                            <i class="bi bi-person-circle display-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h1 class="fs-3 fw-bold mb-3">{{ $nama->name }}</h1>
+                                        <p class="text-justify">{{ $testi->testimoni }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <h1 class="fs-3 fw-bold mb-3">Nama User</h1>
-                                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde labore
-                                    necessitatibus obcaecati veniam cupiditate enim voluptate omnis aut nostrum sint ad
-                                    saepe
-                                    dolore, harum aliquam explicabo nisi laboriosam error officiis!</p>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            @endfor
+                    @endif
+                @endforeach
+            @endforeach
         </div>
     </div>
 

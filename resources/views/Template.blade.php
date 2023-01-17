@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Toko Kue</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Kedai Khairaku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
@@ -34,23 +34,36 @@
                     <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
                 </form>
                 <ul class="navbar-nav mb-lg-0">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="bi bi-cart-fill"></i></a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <!-- Button modal Register -->
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                            data-bs-target="#modalRegister">
-                            Daftar
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <!-- Button modal Login -->
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal"
-                            data-bs-target="#modalLogin">
-                            Login
-                        </button>
-                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a href="/keranjang" class="nav-link"><i class="bi bi-cart-fill"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a type="a" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                data-bs-display="static" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a href="/logout" class="dropdown-item">Logout</a></li>
+                            </ul>
+                        </li>
+                    @endauth
+                    @guest
+                        <li class="nav-item me-2">
+                            <!-- Button modal Register -->
+                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#modalRegister">
+                                Daftar
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Button modal Login -->
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#modalLogin">
+                                Login
+                            </button>
+                        </li>
+                    @endguest
                     {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -71,67 +84,76 @@
     </nav>
 
     <!-- Modal Login -->
-    <div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h1 class="modal-title fs-4 text-primer w-100" id="staticBackdropLabel">Login</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput" class="text-primer">Alamat Email</label>
+    <form action="/login" method="post">
+        @csrf
+        <div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-4 text-primer w-100" id="staticBackdropLabel">Login</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword" class="text-primer">Password</label>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com">
+                            <label for="floatingInput" class="text-primer">Alamat Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword" class="text-primer">Password</label>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primer w-100">Login</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primer w-100">Login</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Modal Register -->
-    <div class="modal fade" id="modalRegister" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h1 class="modal-title fs-4 text-primer w-100" id="staticBackdropLabel">Daftar Akun</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputNama"
-                            placeholder="Nama Lengkap">
-                        <label for="floatingInputNama" class="text-primer">Nama Lengkap</label>
+    <form action="/daftar" method="post">
+        @csrf
+        <div class="modal fade" id="modalRegister" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-4 text-primer w-100" id="staticBackdropLabel">Daftar Akun</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputNama"
-                            placeholder="Nama Lengkap">
-                        <label for="floatingInputNama" class="text-primer">Nomor Telepon</label>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control" id="floatingInputNama"
+                                placeholder="Nama Lengkap">
+                            <label for="floatingInputNama" class="text-primer">Nama Lengkap</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="no_hp" class="form-control" id="floatingInputNama"
+                                placeholder="Nomor Telepon">
+                            <label for="floatingInputNama" class="text-primer">Nomor Telepon</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com">
+                            <label for="floatingInput" class="text-primer">Alamat Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password" class="form-control" id="floatingPassword"
+                                placeholder="Password">
+                            <label for="floatingPassword" class="text-primer">Password</label>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput"
-                            placeholder="name@example.com">
-                        <label for="floatingInput" class="text-primer">Alamat Email</label>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primer w-100">Daftar</button>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword" class="text-primer">Password</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primer w-100">Daftar</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     {{-- Navbar end --}}
 
@@ -166,17 +188,17 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold">Jenis Kue</h6>
                         <p>
-                            <a class="text-white">Kue Tart</a>
+                            <a class="text-white">Kue Basah</a>
                         </p>
                         <p>
-                            <a class="text-white">Kue Ulang Tahun</a>
-                        </p>
-                        <p>
-                            <a class="text-white">Kue Pernikahan</a>
+                            <a class="text-white">Kue Kering</a>
                         </p>
                         <p>
                             <a class="text-white">Kue Bolu</a>
                         </p>
+                        {{-- <p>
+                            <a class="text-white">Kue Bolu</a>
+                        </p> --}}
                     </div>
                     <!-- Grid column -->
 
@@ -193,9 +215,9 @@
                         <p>
                             <a class="text-white">Keluaran Terbaru</a>
                         </p>
-                        <p>
+                        {{-- <p>
                             <a class="text-white">Kue Kostum</a>
-                        </p>
+                        </p> --}}
                         <p>
                             <a class="text-white">Beli Kue</a>
                         </p>
@@ -261,13 +283,8 @@
     </footer>
     <!-- Footer -->
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
-    </script>
-</body>
 
 </html>

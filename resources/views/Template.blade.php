@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kedai Khairaku</title>
+    <title>Kedai Khaira</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-primer navbar-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Kedai KhairaKu</a>
+            <a class="navbar-brand" href="/">Kedai Khaira</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -29,10 +29,6 @@
                         <a class="nav-link" href="/kue">Kue</a>
                     </li>
                 </ul>
-                <form class="d-flex me-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
                 <ul class="navbar-nav mb-lg-0">
                     @auth
                         <li class="nav-item">
@@ -174,10 +170,10 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class=" navbar-brand mb-4 font-weight-bold">
-                            Kedai KhairaKu
+                            Kedai Khaira
                         </h6>
                         <p>
-                            Kedai KhairaKu menjual berbagai jenis kue yang bisa langsung dikirim ke rumah pelanggan.
+                            Kedai Khaira menjual berbagai jenis kue yang bisa langsung dikirim ke rumah pelanggan.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -250,7 +246,7 @@
                         <!-- Copyright -->
                         <div class="p-3">
                             © 2023 Copyright:
-                            <a class="text-white">Kedai KhairaKu</a>
+                            <a class="text-white">Kedai Khaira</a>
                         </div>
                         <!-- Copyright -->
                     </div>

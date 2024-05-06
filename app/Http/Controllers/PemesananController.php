@@ -48,7 +48,15 @@ class PemesananController extends Controller
         $pesan->bukti_bayar = $bukti_bayar;
         $pesan->status = 'Verifikasi Pembayaran';
 
+        $kue = Kue::find($pesan->kue_id);
+        $kue->total_order += 1;
+
+        $kue->save();
+
         $pesan->save();
+
+
+
 
         return back();
     }

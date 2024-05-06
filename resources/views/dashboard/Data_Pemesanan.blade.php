@@ -28,20 +28,23 @@
                         @if ($orang->id == $data->user_id)
                             @foreach ($kue as $kuee)
                                 @if ($kuee->id == $data->kue_id)
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $kuee->nama_kue }}</td>
-                                    <td>{{ $orang->name }}</td>
-                                    <td>{{ $data->jumlah_beli }}</td>
-                                    <td>{{ $data->alamat }}</td>
-                                    <td>Rp {{ number_format($data->jumlah_beli * $kuee->harga_kue) }}</td>
-                                    <td>{{ $data->status }}</td>
-                                    <td><img src="{{ asset('foto-bukti-bayar/' . $data->bukti_bayar) }}" width="30"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
-                                            data-bs-target="#editKue{{ $data->id }}">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                    </td>
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $kuee->nama_kue }}</td>
+                                        <td>{{ $orang->name }}</td>
+                                        <td>{{ $data->jumlah_beli }}</td>
+                                        <td>{{ $data->alamat }}</td>
+                                        <td>Rp {{ number_format($data->jumlah_beli * $kuee->harga_kue) }}</td>
+                                        <td>{{ $data->status }}</td>
+                                        <td><img src="{{ asset('foto-bukti-bayar/' . $data->bukti_bayar) }}" width="30">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
+                                                data-bs-target="#editKue{{ $data->id }}">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 @endif
                             @endforeach
                         @endif

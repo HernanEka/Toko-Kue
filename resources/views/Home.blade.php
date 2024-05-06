@@ -51,6 +51,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title fs-3">{{ $data->nama_kue }}</h5>
                                 <p class="card-text fw-bold">Rp {{ number_format($data->harga_kue) }}</p>
+                                <p>Total Order : {{ $data->total_order }}</p>
                                 <a href="/pembelian/{{ $data->id }}" class="btn btn-primer w-100"> Pesan Sekarang</a>
                             </div>
                         </div>

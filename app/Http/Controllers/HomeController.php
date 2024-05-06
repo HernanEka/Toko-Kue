@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $favorit = Kue::orderBy('total_order')->paginate(3);
+        $favorit = Kue::orderBy('total_order', 'DESC')->paginate(3);
         $terbaru = Kue::latest()->paginate(3);
 
         return view('Home', compact('favorit', 'terbaru'));
